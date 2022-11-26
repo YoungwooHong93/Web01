@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee; http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+
+	<display-name>Web01</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- 서블릿 등록 -->
+	<servlet>
+	<servlet-name>loginServlet</servlet-name>
+	<servlet-class>servletStudy.LoginServlet</servlet-class>
+	</servlet>
+	
+	<!-- 경로 매핑 -->
+	<servlet-mapping>
+	<servlet-name>loginServlet</servlet-name>
+	<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- url 매핑 -->
+	<servlet>
+		<servlet-name>guguServlet</servlet-name>
+		<servlet-class>servlet01.Ex02_GuGu</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>guguServlet</servlet-name>
+		<url-pattern>/gugu</url-pattern>
+		<url-pattern>/99</url-pattern>
+	</servlet-mapping>
+
+	<!-- Session Time 설정 
+		=> 분 단위 이며 0 또는 음수를 지정하면 무한시간 -->
+	<session-config>
+		<session-timeout> 0 </session-timeout>
+	</session-config>
+
+	<!-- 초기화 파라미터 -->
+	<context-param>
+	<description>관리자 로그인 확인 _ 생략가능 </description>
+	<param-name>isLogin</param-name>
+	<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+	<description>관리자 ID</description>
+	<param-name>adminID</param-name>
+	<param-value>green</param-value>
+	</context-param>
+	
+	<context-param>
+	<description>관리자 Password</description>
+	<param-name>adminPW</param-name>
+	<param-value>12345!</param-value>
+	</context-param>
+	
+	<!-- Exception Test1 : 응답상태코드 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/jsp04_exception/ex02_404Page.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/jsp04_exception/ex02_500Page.jsp</location>
+	</error-page>
+	<!-- Exception Test2 : Exception Type -->
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/jsp04_exception/ex03_Null.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.ArithmeticException</exception-type>
+		<location>/jsp04_exception/ex03_Arith.jsp</location>
+	</error-page>
+	
+	
+</web-app>
